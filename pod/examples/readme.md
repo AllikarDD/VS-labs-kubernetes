@@ -4,6 +4,9 @@ kubectl apply -f simple-pod.yaml
 ```shell
 kubectl apply -f simple-job.yaml
 ```
+```shell
+kubectl apply -f simple-liveness.yaml
+```
 
 ---
 
