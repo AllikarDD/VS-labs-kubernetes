@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: init-demo
+spec:
+  containers:
+    - name: app
+      image: nginx
+      volumeMounts:
+        - name: config
+          mountPath: /etc/nginx
+  initContainers:
+    - name: config-loader
+      image: busybox
+      command: ['sh', '-c', "cp /tmp/config/* /etc/nginx/"]
+      volumeMounts:
+        - name: config
+          mountPath: /etc/nginx
+        - name: source
+          mountPath: /tmp/config
+  volumes:
+    - name: config
+      emptyDir: {}
+    - name: source
+      configMap:
+        name: nginx-config

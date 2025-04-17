@@ -10,6 +10,9 @@ kubectl apply -f simple-liveness.yaml
 ```shell
 kubectl apply -f simple-sidecar.yaml
 ```
+```shell
+kubectl apply -f simple-init.yaml
+```
 ---
 
 Чтобы получить список Pod'ов:
