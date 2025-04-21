@@ -1,7 +1,0 @@
-environment: development
-container:
-  name: demo
-  port: 8888
-  image: myhello
-  tag: hello
-replicas: 1
