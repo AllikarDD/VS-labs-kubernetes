@@ -1,6 +1,6 @@
 # Лаборная работа
 
-## Настройка рабоы в Kubernetes
+## Настройка работы в Kubernetes
 
 1. В ключите поддержку kubernetes в Docker Desktop
 
