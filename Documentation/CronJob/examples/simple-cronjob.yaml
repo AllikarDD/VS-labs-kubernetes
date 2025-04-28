@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: nightly-backup
+spec:
+  schedule: "0 3 * * *"  # Каждый день в 3:00 (формат cron)
+  jobTemplate:           # Шаблон для создания Job
+    spec:
+      template:
+        spec:
+          containers:
+            - name: backup
+              image: postgres:14
+              command: ["/bin/sh", "-c", "pg_dumpall -U postgres > /backups/$(date +%Y-%m-%d).sql"]
+              volumeMounts:
+                - name: backup-volume
+                  mountPath: /backups
+          restartPolicy: OnFailure
+          volumes:
+            - name: backup-volume
+              persistentVolumeClaim:
+                claimName: backup-pvc
+  successfulJobsHistoryLimit: 3  # Хранить историю 3 успешных Job
+  failedJobsHistoryLimit: 1      # Хранить историю 1 неудачной Job
