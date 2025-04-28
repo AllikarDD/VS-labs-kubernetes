@@ -39,6 +39,8 @@ Deployment (v2)
       └── Pod (v2)
 ```
 
+![deepseek_mermaid_20250428_2f6e02](assets/deepseek_mermaid_20250428_2f6e02-20250428140436-li1n30j.png)
+
 ---
 
 ### **3. Ключевые возможности**
