@@ -16,6 +16,10 @@
 * Управление доступом (через RBAC).
 * Организация объектов Kubernetes (логическая группировка).
 
+‍
+
+![image](assets/image-20250428124242-d37y5wk.png)
+
 ---
 
 ### **2. Стандартные пространства имён**
@@ -131,6 +135,8 @@ spec:
     pods: "10"
 ```
 
+![image](assets/image-20250428124313-6ov0l65.png)
+
 ---
 
 ### **7. DNS внутри Namespace**
@@ -160,3 +166,5 @@ spec:
 |​`kubectl config set-context --current --namespace=my-ns`​|Переключиться на Namespace|
 
 ---
+
+‍

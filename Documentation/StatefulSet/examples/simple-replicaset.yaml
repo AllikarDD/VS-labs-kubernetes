@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: frontend
+  labels:
+    app: web
+    tier: frontend
+spec:
+  replicas: 3  # Желаемое количество Pod'ов
+  selector:    # Селектор для поиска управляемых Pod'ов
+    matchLabels:
+      tier: frontend
+  template:    # Шаблон для создания новых Pod'ов
+    metadata:
+      labels:
+        tier: frontend  # Должен соответствовать селектору!
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.14
+          ports:
+            - containerPort: 80

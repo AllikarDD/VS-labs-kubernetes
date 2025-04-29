@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  strategy:
+    type: RollingUpdate  # Default
+    rollingUpdate:
+      maxSurge: 1        # Сколько Pod'ов можно создать сверх replicas
+      maxUnavailable: 0  # Сколько Pod'ов могут быть недоступны во время обновления
+  replicas: 3  # Количество Pod'ов
+  selector:
+    matchLabels:
+      app: nginx
+  template:  # Шаблон Pod'а
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.16
+          ports:
+            - containerPort: 80

@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: pi-calculation
+spec:
+  template:
+    spec:
+      containers:
+        - name: pi
+          image: perl:5.34
+          command: ["perl", "-Mbignum=bpi", "-wle", "print bpi(2000)"]  # Вычисление числа π
+      restartPolicy: Never  # Или OnFailure
+  backoffLimit: 4  # Максимальное количество повторных попыток
+#  Как это работает:
+#
+#  1. Создается Pod, который вычисляет 2000 знаков числа π
+#  2. После завершения расчета Job помечается как выполненная
+#  3. Pod остается доступным для просмотра логов (но не перезапускается)
