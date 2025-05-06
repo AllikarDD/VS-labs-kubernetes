@@ -22,3 +22,14 @@
 -  [Задание / Job](Documentation/Job)
 -  [Набор реплик / ReplicaSet](Documentation/ReplicaSet)
 -  [Наборы с отслеживаниемым состоянием / StatefulSet](Documentation/StatefulSet)
+
+
+# Лабораторная работа 2
+
+-  [Лабораторная работа 2 / Lab2](Lab2)
+
+Документация для лабораторной работы:
+-  [Секреты / Secrets](Documentation/Secrets)
+
+
+
