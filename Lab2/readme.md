@@ -65,15 +65,15 @@ kubectl apply -f simple-configmap.yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-	name: demo-config
+  name: demo-config
 data:
-	greeting: Hola
+  greeting: Hola
 ```
 6. Добавьте ConfigMap в контейнер, который мы создавали в файле  Lab2/deployment.yaml
 ```yaml
-    envFrom:
-      - configMapRef:
-      name: demo-config
+  envFrom:
+    - configMapRef:
+    name: demo-config
 ```
 
 7. Запустите поду и посмотрите что получилось
