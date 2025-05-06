@@ -1,0 +1,23 @@
+# Конфигурация
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: web-app-config
+data:
+  APP_COLOR: blue
+  APP_ENV: prod
+
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  template:
+    spec:
+      containers:
+        - name: app
+          image: nginx
+          envFrom:
+            - configMapRef:
+                name: web-app-config
