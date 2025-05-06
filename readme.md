@@ -29,7 +29,10 @@
 -  [Лабораторная работа 2 / Lab2](Lab2)
 
 Документация для лабораторной работы:
--  [Секреты / Secrets](Documentation/Secrets)
+- [Секреты / Secrets](Documentation/Secrets)
+- [Тома  / Volumes](Documentation/Volumes)
+- [Секреты / Secrets](Documentation/Secrets)
+- [Временные тома / Ephemeral Volumes](Documentation/Ephemeral Volumes)
 
 
 
