@@ -6,14 +6,20 @@ metadata:
 data:
   APP_COLOR: blue
   APP_ENV: prod
-
+---
 # Deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web
 spec:
+  selector:
+    matchLabels:
+      app: web
   template:
+    metadata:
+      labels:
+        app: web
     spec:
       containers:
         - name: app
