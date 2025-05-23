@@ -34,5 +34,12 @@
 - [Секреты / Secrets](Documentation/Secrets)
 - [Временные тома / Ephemeral Volumes](Documentation/Ephemeral Volumes)
 
+# Лабораторная работа 3
+
+-  [Лабораторная работа 3 / lab3](lab3)
+
+
+
+
 
 
