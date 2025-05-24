@@ -31,8 +31,8 @@
 Документация для лабораторной работы:
 - [Секреты / Secrets](Documentation/Secrets)
 - [Тома  / Volumes](Documentation/Volumes)
-- [Секреты / Secrets](Documentation/Secrets)
-- [Временные тома / Ephemeral Volumes](Documentation/Ephemeral Volumes)
+- [ConfigMap](Documentation/ConfigMap)
+- [Временные тома / Ephemeral Volumes](Documentation/Ephemeral%20Volumes)
 
 # Лабораторная работа 3
 
