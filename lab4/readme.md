@@ -73,6 +73,13 @@ spec:
     2. Добавьте `volumeMounts`​ в контенер с путём для папки `mountPath: /var/lib/postgresql/data`​
 
 7. Создайте манифест `Service`​ с проксированием на порт 5432 для StatefulSet, созданного ранее.
+```yaml
+  ports:
+    - port: 5432
+      targetPort: 5432
+
+```
+
 8. Выполните
 
 ```bash
