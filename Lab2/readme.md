@@ -65,13 +65,15 @@ import (
 
 func handler(w http.ResponseWriter, r *http.Request) {
     greeting := os.Getenv("GREETING")
-	fmt.Fprintln(w, "%s, this is Me, Mario", greeting)
+    text := os.Getenv("TEXT")
+    fmt.Fprintln(w, greeting, ", this is Me, Mario")
+    fmt.Fprintln(w, text)
 }
 ```
 
 2. Для примения изменений нужно пересобрать образ `myhello`​
 
-3. Создайте конфигмапу
+3. Создайте конфигмапы
 
 ```yaml
 apiVersion: v1
@@ -82,12 +84,34 @@ data:
   greeting: Hola
 ```
 
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+   name: myconfig
+data:
+   text: "But also they call me Bombardino Crocodilo"
+```
+
 4. Добавьте ConfigMap в контейнер, который мы создавали в файле  Lab2/deployment.yaml
 
 ```yaml
-  envFrom:
-    - configMapRef:
-    name: demo-config
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/config
+          envFrom:
+            - configMapRef:
+                name: myconfigmap
+          env:
+            - name: TEXT
+              valueFrom:
+                configMapKeyRef:
+                  name: myconfig
+                  key: text
+      volumes:
+        - name: config-volume
+          configMap:
+            name: myconfigmap
 ```
 
 5. Запустите поду и посмотрите что получилось
