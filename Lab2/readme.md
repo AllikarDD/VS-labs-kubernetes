@@ -79,16 +79,16 @@ func handler(w http.ResponseWriter, r *http.Request) {
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: demo-config
+  name: configmapref-example-cm
 data:
-  greeting: Hola
+   GREETING: Hola
 ```
 
 ```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-   name: myconfig
+   name: configmapkeyref-example-cm
 data:
    text: "But also they call me Bombardino Crocodilo"
 ```
@@ -96,22 +96,18 @@ data:
 4. Добавьте ConfigMap в контейнер, который мы создавали в файле  Lab2/deployment.yaml
 
 ```yaml
-          volumeMounts:
-            - name: config-volume
-              mountPath: /etc/config
+#         Пример подключения всех параметров из конфигмапы configmapref-example-cm
           envFrom:
-            - configMapRef:
-                name: myconfigmap
+             - configMapRef:
+                  name: configmapref-example-cm
+                  
+#         Пример подключения параметра text из конфигмапы configmapkeyref-example-cm
           env:
-            - name: TEXT
-              valueFrom:
-                configMapKeyRef:
-                  name: myconfig
-                  key: text
-      volumes:
-        - name: config-volume
-          configMap:
-            name: myconfigmap
+             - name: TEXT
+               valueFrom:
+                  configMapKeyRef:
+                     name: configmapkeyref-example-cm
+                     key: text
 ```
 
 5. Запустите поду и посмотрите что получилось
@@ -119,3 +115,44 @@ data:
 7. Посмотрите поменялось ли что-то в вашем поднятом приложении
 8. Попробуйте удалить поду
 9. После поднятия поды, посмотрите применилась ли конфигурация
+
+10. Так же можно создавать файлы конфигурации из конфигмапы
+
+Создайте конфигмапу
+```yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+   name: configfile-example-cm
+data:
+   file.conf: |
+      TEXT=I stronger then 100 Monkeys
+```
+Создайте volumes в контейнере и свяжите с конфигмапой configfile-example-cm в файле  Lab2/deployment.yaml
+```yaml
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/config
+          
+      volumes:
+        - name: config-volume
+          configMap:
+            name: configfile-example-cm
+```
+Поскольку в нашем приложении сразу стартует веб сервис, мы не можем выполнять команды в контейнере 
+
+Для того чтобы проверить, что файл появился, добавьте в Lab2/deployment.yaml
+```yaml
+      initContainers:
+        - name: init-create-dir
+          image: alpine
+#         Выводим в консоль содержимое файла, который создали из конфигмапы
+          command: [ 'sh', '-c', 'sleep 5 && cat /etc/config/file.conf' ]
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/config
+```
+Чтобы посмотреть логи контейнера, выполните команду 
+```bash
+kubectl logs <pod-name> -c <init-container-name>
+```
